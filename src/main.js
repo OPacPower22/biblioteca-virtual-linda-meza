@@ -48,8 +48,7 @@ const funds = [
   { title: 'Mapas', icon: '⌖', group: 'Recursos de estudio', url: 'https://drive.google.com/drive/folders/15GqsNU1rHN-JOHD1dvBCDabpoSjl8ksn' },
   { title: 'Cursos técnicos', icon: '⚙', group: 'Recursos de estudio', url: 'https://drive.google.com/drive/folders/1-DN0N0R8WQ8lNLIv0rgSCNd1qCnipl5G' },
   { title: 'Regalos y PDF', icon: '✦', group: 'Recursos de estudio', url: 'https://drive.google.com/drive/folders/1PzJEQ2XJz30Eeqf1mJftPtgosS8V2rnO' },
-  { title: 'Biblioteca masónica I', icon: '⚒', group: 'Masonería simbólica', url: masonicFolder },
-  { title: 'Biblioteca masónica II', icon: '⚒', group: 'Masonería simbólica', url: 'https://drive.google.com/drive/folders/1QMJJp81qQTtcw-Bb5qd4viw103NCh_Eb?usp=sharing' },
+  { title: 'Biblioteca masónica', icon: '⚒', group: 'Masonería simbólica', url: masonicFolder },
   { title: 'Esoterismo y Masonería', icon: '⚒', group: 'Masonería simbólica', url: esotericFolder },
 ]
 
