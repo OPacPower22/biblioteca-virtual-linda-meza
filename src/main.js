@@ -1,36 +1,74 @@
 import './style.css'
 
-const driveFolder = 'https://drive.google.com/drive/folders/1-49h8bbLXuZK388VnfXEfnrY8-jcVFhm?usp=drive_link'
-const secondFolder = 'https://drive.google.com/drive/folders/1QMJJp81qQTtcw-Bb5qd4viw103NCh_Eb?usp=sharing'
-const books = [
-  { title: 'Los orígenes religiosos de la masonería', author: 'Colección de estudios', category: 'Historia', type: 'PDF', featured: true },
-  { title: 'Los rosacruces y sus enseñanzas', author: 'Reuben Swinburne Clymer', category: 'Esoterismo', type: 'PDF' },
-  { title: 'Morals and Dogma', author: 'Albert Pike', category: 'Rito Escocés', type: 'PDF', featured: true },
-  { title: '33 grados de la masonería', author: 'Biblioteca simbólica', category: 'Rito Escocés', type: 'PDF' },
-  { title: 'Manual de masonería', author: 'Andrés Cassard', category: 'Instrucción', type: 'PDF' },
-  { title: 'La iniciación masónica', author: 'Colección de estudios', category: 'Iniciación', type: 'PDF' },
-  { title: 'Curso filosófico de las iniciaciones', author: 'Jean-Marie Ragon', category: 'Filosofía', type: 'PDF' },
-  { title: 'El Trivium: las artes liberales', author: 'Joseph Sister Miriam', category: 'Filosofía', type: 'PDF' },
+const masonicFolder = 'https://drive.google.com/drive/folders/1-49h8bbLXuZK388VnfXEfnrY8-jcVFhm?usp=drive_link'
+const funds = [
+  { title: '1800 audiolibros', icon: '🎧', group: 'Colecciones generales', url: 'https://drive.google.com/drive/folders/1eNIi91KWHTQur90rhSM5vevtIsgC_jsq' },
+  { title: 'Biblioteca digital', icon: '📚', group: 'Colecciones generales', url: 'https://drive.google.com/drive/folders/1wkeJVCVKlqJsEbpsKenb02hOn_1bE1Ny' },
+  { title: 'Pack de libros', icon: '▣', group: 'Colecciones generales', url: 'https://drive.google.com/drive/folders/1908wXS9fmo793D-TytqGNDXnuDDe9CSG' },
+  { title: 'Más libros', icon: '＋', group: 'Colecciones generales', url: 'https://drive.google.com/drive/folders/1kpF2UmDyMX9_ZvDr_W8OCvpQj6sbnMIr' },
+  { title: 'Varios autores', icon: '✦', group: 'Colecciones generales', url: 'https://drive.google.com/drive/folders/10AESNF8GXBsrIqQvqkZzWM72HpgZODMp' },
+  { title: 'Educación financiera', icon: '₿', group: 'Desarrollo y negocios', url: 'https://drive.google.com/drive/folders/1TaMkFR54YAVwzy9x1s4Y1iXIK5YUAvT_' },
+  { title: 'Emprendimiento, MKT y superación', icon: '↗', group: 'Desarrollo y negocios', url: 'https://drive.google.com/drive/u/0/mobile/folders/1vTRZBjGfh3RUsUxrV8I0Slm0AeFSrlWn?fbclid=IwAR3Sk_vVKzcxdeVniBapTkfimu8tH15scI2a8nIGZFSDr6fYF3MnmaY7QB8' },
+  { title: '100 ideas de emprendimiento', icon: '✧', group: 'Desarrollo y negocios', url: 'https://drive.google.com/drive/folders/1PzJEQ2XJz30Eeqf1mJftPtgosS8V2rnO' },
+  { title: 'Jorge Bucay', icon: 'J', group: 'Autores y literatura', url: 'https://drive.google.com/drive/mobile/folders/1hyFO14FzqJSdE7ZJJPzIvp8P-1HcDaAB?usp=sharing' },
+  { title: 'Jane Austen', icon: 'A', group: 'Autores y literatura', url: 'https://drive.google.com/drive/mobile/folders/18dkNqqiDX1mD0wfHizW-4vi9RDZIKmaU?usp=sharing' },
+  { title: 'Stephen King', icon: 'K', group: 'Autores y literatura', url: 'https://drive.google.com/drive/folders/0BzpbWpB0Ec4SflAyS0RQSDdLQjNVa05kRnpyTUtMbVZvRHRQUUFNTk5GUkZ4bFlMbkRKUG8?resourcekey=0-fMqROl-FUG9xzvKp1yoefQ' },
+  { title: 'Walter Riso', icon: 'R', group: 'Autores y literatura', url: 'https://drive.google.com/drive/mobile/folders/12Gg3LM9v1jdBsQOekOhoQHll2ZAgZFu_' },
+  { title: 'Nicholas Sparks', icon: 'N', group: 'Autores y literatura', url: 'https://drive.google.com/drive/mobile/folders/102aSTAcD6r7P3tm-nyCcT6hJh6FJyW-G' },
+  { title: 'Jhon Katzenbach', icon: 'K', group: 'Autores y literatura', url: 'https://drive.google.com/drive/mobile/folders/1k9aGqIhtsLsxZSEv32Di9FEtdnmoXpcD' },
+  { title: 'Lovecraft', icon: 'L', group: 'Autores y literatura', url: 'https://mega.nz/folder/H3hB3aJB#yfn9MrxJeVKU1gWmX_ItOg' },
+  { title: 'Narnia', icon: 'N', group: 'Ficción y sagas', url: 'https://drive.google.com/folderview?id=16A13PrDWorxi9M6ulqJQuek8bOAVjjkA' },
+  { title: '50 sombras', icon: '50', group: 'Ficción y sagas', url: 'https://mega.nz/folder/AchSXBoQ#5duVSiyt0tR-vMkP1ssnKA' },
+  { title: 'Asesino de reyes', icon: '✦', group: 'Ficción y sagas', url: 'https://drive.google.com/drive/mobile/folders/1uEntWSBLqI6cBmQ7L5PUq5eUKYyLQW9b' },
+  { title: 'Outlander', icon: 'O', group: 'Ficción y sagas', url: 'https://drive.google.com/drive/mobile/folders/1Adc098TmdxbB5q7hXnCdsxJBZs6i7mj8' },
+  { title: 'Caballo de Troya', icon: 'C', group: 'Ficción y sagas', url: 'https://drive.google.com/drive/mobile/folders/1LnL6bqOQMpTRgBTV7SlLG6v76DlDd-wO' },
+  { title: 'Game of Thrones', icon: 'G', group: 'Ficción y sagas', url: 'https://mega.nz/folder/LZUElYLT#RF1tYwrhioo1V4meuyTSAQ' },
+  { title: 'Harry y James Potter', icon: '⚡', group: 'Ficción y sagas', url: 'https://mega.nz/folder/eVBTXQaJ#SAJvjbiEYkDO8p3w3zIdxQ' },
+  { title: 'Gatos guerreros', icon: 'G', group: 'Ficción y sagas', url: 'https://drive.google.com/drive/mobile/folders/1X--iHJwnw0rrbJ_FaPTsStw_KKsOjJPI' },
+  { title: 'Cazadores de sombras', icon: '☽', group: 'Ficción y sagas', url: 'https://drive.google.com/drive/mobile/folders/1-40frFRraZejWarPlaXNlP2zTsrS4ABi' },
+  { title: 'El señor de los anillos', icon: 'R', group: 'Ficción y sagas', url: 'https://drive.google.com/drive/mobile/folders/1APNWDOYl1aArUs8975gWFa11Zeqhf4yC' },
+  { title: 'Medicina', icon: '✚', group: 'Ciencias de la salud', url: 'https://drive.google.com/drive/folders/1IVs_aaCYxHHlqG5EyTjBK4CxCs81_XNZ' },
+  { title: 'Medicina: 1100 diagramas', icon: '✚', group: 'Ciencias de la salud', url: 'https://tinyurl.com/1100DiagramasMedicos' },
+  { title: 'Medicina: colección complementaria', icon: '✚', group: 'Ciencias de la salud', url: 'https://drive.google.com/drive/mobile/folders/1mLmHj7bDldLUiVBaO7Okmhdo2G56VJO0?sort=13&direction=a&fbclid=IwAR28aj2qGK3_Kt_h6Dco_CRsg7yfUpQbgsV9JveDNqyY7OqmnvE_C8U_K9I' },
+  { title: 'Enfermería', icon: '＋', group: 'Ciencias de la salud', url: 'https://drive.google.com/drive/mobile/folders/15GGG2P1GUTj0_gnN6eHy3ed063-CD9ER' },
+  { title: 'Enfermería: colección complementaria', icon: '＋', group: 'Ciencias de la salud', url: 'https://drive.google.com/drive/mobile/folders/1rxH37ZYtCIDJ224Yjh0c6J8KmSZcdZSi' },
+  { title: 'Odontología', icon: '☼', group: 'Ciencias de la salud', url: 'https://drive.google.com/drive/mobile/folders/1O9dAtdGCgh9mbXUpMtYOm9stxMbHx7DG' },
+  { title: 'Veterinaria', icon: '♞', group: 'Ciencias de la salud', url: 'https://drive.google.com/drive/mobile/folders/1mzg8hWGJLdgBvBWESuDyR7PJ3f5S3F-_' },
+  { title: 'Psicología oscura', icon: '◐', group: 'Ciencias humanas', url: 'https://drive.google.com/file/d/1H4hl1P4PYeigvQR-HIQMInGbOWk37gx_/view' },
+  { title: 'Idiomas', icon: 'A/', group: 'Recursos de estudio', url: 'https://drive.google.com/drive/mobile/folders/1Dm6vhwHoIO3UmHngvjlIHROQLAqMzuoo' },
+  { title: 'Autores clásicos', icon: '⌘', group: 'Recursos de estudio', url: 'https://drive.google.com/drive/mobile/folders/0BwxbUNiKeAdLTGRVSkJzUlpUNFU?fbclid=IwAR3X7a4c_Rm6XbG0KLWRHMUp-z1yzRx--UD7M_L0qT8RVBOulSstoPBX_Eo&resourcekey=0-ScpOMrxzAdtNOjf_D6Z1lg' },
+  { title: 'PDF variados', icon: 'PDF', group: 'Recursos de estudio', url: 'https://drive.google.com/drive/folders/1i6gldzGV4lJxF-fv641grVK0IKo5kov8?usp=sharing' },
+  { title: 'Papelería digital', icon: '✎', group: 'Recursos de estudio', url: 'https://drive.google.com/drive/folders/1wTyBXgxuXzxCt68AGb5dG1m5JwD7ULMV' },
+  { title: 'Monografías', icon: '▤', group: 'Recursos de estudio', url: 'https://drive.google.com/drive/folders/1wTyBXgxuXzxCt68AGb5dG1m5JwD7ULMV' },
+  { title: 'Biografías', icon: '♙', group: 'Recursos de estudio', url: 'https://drive.google.com/drive/folders/16nL41jnty21jGEwb5alyEUogoKthrAYz' },
+  { title: 'Mapas', icon: '⌖', group: 'Recursos de estudio', url: 'https://drive.google.com/drive/folders/15GqsNU1rHN-JOHD1dvBCDabpoSjl8ksn' },
+  { title: 'Cursos técnicos', icon: '⚙', group: 'Recursos de estudio', url: 'https://drive.google.com/drive/folders/1-DN0N0R8WQ8lNLIv0rgSCNd1qCnipl5G' },
+  { title: 'Regalos y PDF', icon: '✦', group: 'Recursos de estudio', url: 'https://drive.google.com/drive/folders/1PzJEQ2XJz30Eeqf1mJftPtgosS8V2rnO' },
+  { title: 'Biblioteca masónica I', icon: '⚒', group: 'Masonería simbólica', url: masonicFolder },
+  { title: 'Biblioteca masónica II', icon: '⚒', group: 'Masonería simbólica', url: 'https://drive.google.com/drive/folders/1QMJJp81qQTtcw-Bb5qd4viw103NCh_Eb?usp=sharing' },
 ]
-const icon = (name) => ({ search: '⌕', book: '▣', arrow: '↗', menu: '☰' })[name]
+
+const groups = ['Todos', ...new Set(funds.map((fund) => fund.group))]
+const icon = (name) => ({ search: '⌕', arrow: '↗', menu: '☰' })[name]
 
 document.querySelector('#app').innerHTML = `
-<header class="site-header"><a class="brand" href="#inicio" aria-label="Biblioteca Virtual Dra. Linda Meza"><span class="brand-mark" aria-hidden="true">⚒</span><span><strong>Biblioteca Virtual</strong><small>Dra. Linda Meza</small></span></a><nav class="nav-links" aria-label="Navegación principal"><a href="#colecciones">Colecciones</a><a href="#acerca">Acerca del acervo</a><a class="nav-archive" href="${driveFolder}" target="_blank" rel="noreferrer">Abrir Drive ${icon('arrow')}</a></nav><button class="menu-button" type="button" aria-label="Abrir menú">${icon('menu')}</button></header>
-<main id="inicio"><section class="hero-section"><div class="hero-copy"><p class="eyebrow"><span></span> Archivo de conocimiento simbólico</p><h1>Una biblioteca para <em>buscar la luz.</em></h1><p class="hero-lede">Un espacio de estudio, memoria y fraternidad dedicado a preservar las voces que han construido la tradición masónica.</p><div class="hero-actions"><a class="button button-gold" href="#colecciones">Explorar el acervo ${icon('arrow')}</a><a class="text-link" href="#acerca">Conocer la biblioteca</a></div></div><div class="hero-emblem" aria-label="Símbolo masónico: escuadra, compás y estrella"><div class="compass compass-left"></div><div class="compass compass-right"></div><div class="square-mark"></div><div class="hero-star">✦</div><span class="emblem-label">LUX · VERITAS · FRATERNITAS</span></div></section>
-<section class="stats-bar" aria-label="Resumen del acervo"><div><strong>08</strong><span>Obras destacadas</span></div><div><strong>06</strong><span>Áreas de estudio</span></div><div><strong>02</strong><span>Fondos documentales</span></div><div class="stats-note">“La ciencia es la luz del espíritu.”</div></section>
-<section class="library-section" id="colecciones"><div class="section-heading"><div><p class="eyebrow"><span></span> Catálogo digital</p><h2>La sala de lectura</h2></div><p class="section-intro">Textos para recorrer la historia, los ritos y la filosofía de la masonería simbólica.</p></div><div class="toolbar"><label class="search-box">${icon('search')}<input id="search" type="search" placeholder="Buscar por título o autor..." aria-label="Buscar en el catálogo"></label><div class="filter-group" role="group" aria-label="Filtrar por categoría"><button class="filter active" data-filter="Todos">Todos</button><button class="filter" data-filter="Historia">Historia</button><button class="filter" data-filter="Rito Escocés">Rito escocés</button><button class="filter" data-filter="Filosofía">Filosofía</button><button class="filter" data-filter="Iniciación">Iniciación</button></div></div><div class="book-grid" id="book-grid"></div><p class="empty-state" id="empty-state">No encontramos obras con ese criterio.</p></section>
-<section class="archive-band" id="acerca"><div class="archive-symbol">✦</div><div><p class="eyebrow"><span></span> Fondos enlazados</p><h2>El archivo continúa más allá de estas páginas.</h2><p>Consulta el fondo documental compartido para acceder a la colección completa de textos, planchas e instrucciones.</p></div><a class="button button-outline" href="${driveFolder}" target="_blank" rel="noreferrer">Ver colección completa ${icon('arrow')}</a></section><section class="collection-note"><div><span class="note-number">01</span><h2>Una casa para la memoria</h2></div><p>La Biblioteca Virtual Dra. Linda Meza nace para ordenar, compartir y hacer accesible un patrimonio de estudio que crece con cada nueva lectura.</p><a class="text-link" href="${secondFolder}" target="_blank" rel="noreferrer">Visitar fondo complementario ${icon('arrow')}</a></section></main><footer><span>© 2026 Biblioteca Virtual Dra. Linda Meza</span><span>Estudio · Fraternidad · Progreso</span></footer>`
+  <header class="site-header"><a class="brand" href="#inicio" aria-label="Biblioteca Virtual Dra. Linda Meza"><span class="brand-mark">⚒</span><span><strong>Biblioteca Virtual</strong><small>Dra. Linda Meza</small></span></a><nav class="nav-links"><a href="#colecciones">Colecciones</a><a href="#destacados">Fondos destacados</a><a class="nav-archive" href="${masonicFolder}" target="_blank" rel="noreferrer">Masonería ${icon('arrow')}</a></nav><button class="menu-button" type="button" aria-label="Abrir menú">${icon('menu')}</button></header>
+  <main id="inicio"><section class="hero-section"><div class="hero-copy"><p class="eyebrow"><span></span> Archivo de lectura y conocimiento</p><h1>Una casa para <em>buscar la luz.</em></h1><p class="hero-lede">Una biblioteca digital abierta para explorar literatura, ciencia, salud, formación y memoria masónica desde un mismo lugar.</p><div class="hero-actions"><a class="button button-gold" href="#colecciones">Explorar colecciones ${icon('arrow')}</a><a class="text-link" href="#destacados">Ver fondos destacados</a></div></div><div class="hero-art" role="img" aria-label="Composición simbólica de biblioteca, libro abierto, escuadra y compás"><div class="art-sun">✦</div><div class="art-eye">◉</div><div class="art-book"><span>G</span></div><div class="art-compass"></div><div class="art-label">LUX · VERITAS · FRATERNITAS</div></div></section>
+  <section class="stats-bar"><div><strong>${funds.length}</strong><span>Fondos enlazados</span></div><div><strong>${groups.length - 1}</strong><span>Áreas de lectura</span></div><div><strong>02</strong><span>Acervos masónicos</span></div><div class="stats-note">“La ciencia es la luz del espíritu.”</div></section>
+  <section class="library-section" id="colecciones"><div class="section-heading"><div><p class="eyebrow"><span></span> Catálogo organizado</p><h2>La sala de lectura</h2></div><p class="section-intro">Todos los enlaces compartidos, ordenados por tema para encontrar el próximo libro con menos ruido.</p></div><div class="toolbar"><label class="search-box">${icon('search')}<input id="search" type="search" placeholder="Buscar colección o autor..." aria-label="Buscar en las colecciones"></label><div class="filter-group" role="group" aria-label="Filtrar colecciones">${groups.map((group) => `<button class="filter ${group === 'Todos' ? 'active' : ''}" data-filter="${group}">${group}</button>`).join('')}</div></div><div class="fund-grid" id="fund-grid"></div><p class="empty-state" id="empty-state" hidden>No encontramos fondos con ese criterio.</p></section>
+  <section class="featured-section" id="destacados"><div class="featured-image"><div class="image-medallion">⚒</div></div><div class="featured-copy"><p class="eyebrow"><span></span> Fondos destacados</p><h2>Lecturas que abren nuevas puertas.</h2><p>Desde audiolibros y sagas literarias hasta medicina, emprendimiento y formación técnica. Cada tarjeta te lleva directamente a su carpeta de consulta.</p><a class="button button-outline-dark" href="#colecciones">Recorrer el archivo ${icon('arrow')}</a></div></section>
+  <section class="archive-band"><div class="archive-symbol">✦</div><div><p class="eyebrow"><span></span> Colección de referencia</p><h2>El archivo masónico continúa.</h2><p>Consulta los fondos de la Dra. Linda Meza para acceder a textos de historia, ritos, filosofía e instrucción.</p></div><a class="button button-outline" href="${masonicFolder}" target="_blank" rel="noreferrer">Abrir acervo masónico ${icon('arrow')}</a></section></main><footer><span>© 2026 Biblioteca Virtual Dra. Linda Meza</span><span>Estudio · Fraternidad · Progreso</span></footer>`
 
-const grid = document.querySelector('#book-grid')
+const grid = document.querySelector('#fund-grid')
 const emptyState = document.querySelector('#empty-state')
 let activeFilter = 'Todos'
-function renderBooks() {
+function renderFunds() {
   const query = document.querySelector('#search').value.toLowerCase().trim()
-  const visible = books.filter((book) => (activeFilter === 'Todos' || book.category === activeFilter) && `${book.title} ${book.author}`.toLowerCase().includes(query))
-  grid.innerHTML = visible.map((book, index) => `<article class="book-card ${book.featured ? 'featured' : ''}" style="--delay: ${index * 60}ms"><div class="book-top"><span class="book-type">${book.type}</span><span class="book-icon">${icon('book')}</span></div><div class="book-cover"><span>${book.title.split(' ').slice(0, 2).join(' ')}</span><b>✦</b><small>Biblioteca<br>Linda Meza</small></div><div class="book-info"><span class="category">${book.category}</span><h3>${book.title}</h3><p>${book.author}</p><a href="${driveFolder}" target="_blank" rel="noreferrer" aria-label="Abrir ${book.title}">Abrir lectura ${icon('arrow')}</a></div></article>`).join('')
+  const visible = funds.filter((fund) => (activeFilter === 'Todos' || fund.group === activeFilter) && `${fund.title} ${fund.group}`.toLowerCase().includes(query))
+  grid.innerHTML = visible.map((fund, index) => `<article class="fund-card" style="--delay:${index * 25}ms"><div class="fund-top"><span class="fund-icon">${fund.icon}</span><span class="fund-arrow">${icon('arrow')}</span></div><span class="fund-group">${fund.group}</span><h3>${fund.title}</h3><p>Acceso directo al fondo documental compartido.</p><a href="${fund.url}" target="_blank" rel="noopener noreferrer">Abrir colección ${icon('arrow')}</a></article>`).join('')
   emptyState.hidden = visible.length > 0
 }
-document.querySelector('#search').addEventListener('input', renderBooks)
-document.querySelectorAll('.filter').forEach((button) => button.addEventListener('click', () => { document.querySelector('.filter.active').classList.remove('active'); button.classList.add('active'); activeFilter = button.dataset.filter; renderBooks() }))
+document.querySelector('#search').addEventListener('input', renderFunds)
+document.querySelectorAll('.filter').forEach((button) => button.addEventListener('click', () => { document.querySelector('.filter.active').classList.remove('active'); button.classList.add('active'); activeFilter = button.dataset.filter; renderFunds() }))
 document.querySelector('.menu-button').addEventListener('click', () => document.querySelector('.nav-links').classList.toggle('open'))
-renderBooks()
+renderFunds()
